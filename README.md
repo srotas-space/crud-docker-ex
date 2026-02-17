@@ -315,20 +315,25 @@ CMD ["node", "dist/index.js"]
 # Test Cases
 ------------------------------------------------------------------------
 ### Create User (POST)
+```CMD
 curl -X POST http://localhost:3000/users \
   -H "Content-Type: application/json" \
   -d '{
         "name": "John Doe",
         "email": "john@example.com"
       }'
+```
 
 ### Get All Users (GET)
+```CMD
 curl http://localhost:3000/users
-
+```
 
 
 ### Delete User (DELETE)
+```CMD
 curl -X DELETE http://localhost:3000/users/1
+```
 ------------------------------------------------------------------------
 
 
