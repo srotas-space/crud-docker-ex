@@ -357,6 +357,130 @@ docker history node-ts-crud:latest
 
 ------------------------------------------------------------------------
 
+
+
+
+# 🐳 Docker Hub Setup & Push Guide
+
+------------------------------------------------------------------------
+
+## 1️⃣ Create Docker Hub Account
+
+1.  Go to: https://hub.docker.com/
+2.  Click **Sign Up**
+3.  Fill:
+    -   Username (example: `xsmmaurya`)
+    -   Email
+    -   Password
+4.  Verify email
+5.  Login to Docker Hub
+
+------------------------------------------------------------------------
+
+## 2️⃣ Create Access Token (Recommended)
+
+> 🔐 If 2FA is enabled, password login will NOT work. Use Access Token.
+
+### Steps:
+
+1.  Click your profile icon (top-right)
+2.  Go to **Account Settings**
+3.  Click **Security**
+4.  Click **New Access Token**
+5.  Provide:
+    -   Token Description: `local-mac-push`
+    -   Access: Read & Write
+6.  Click **Generate**
+7.  Copy the token immediately (you won't see it again)
+
+------------------------------------------------------------------------
+
+## 3️⃣ Login from Terminal Using Access Token
+
+``` bash
+docker login -u YOUR_DOCKER_USERNAME
+```
+
+Example:
+
+``` bash
+docker login -u xsmmaurya
+```
+
+When prompted for password → paste the **Access Token**
+
+You should see:
+
+    Login Succeeded
+
+------------------------------------------------------------------------
+
+## 4️⃣ Create Repository (Optional but Recommended)
+
+1.  Go to Docker Hub
+2.  Click **Create Repository**
+3.  Name: `custody`
+4.  Visibility:
+    -   Public (free)
+    -   Private (limited free plan)
+
+Repo path format:
+
+    dockerhub_username/repository
+
+Example:
+
+    xsmmaurya/custody
+
+------------------------------------------------------------------------
+
+## 5️⃣ Tag Your Local Image
+
+Check local images:
+
+``` bash
+docker images
+```
+
+Tag properly:
+
+``` bash
+docker tag custody:1.0.0 xsmmaurya/custody:1.0.0
+docker tag custody:1.0.0 xsmmaurya/custody:latest
+```
+
+Format reminder:
+
+    dockerhub_username/repository:tag
+
+------------------------------------------------------------------------
+
+## 6️⃣ Push Image to Docker Hub
+
+``` bash
+docker push xsmmaurya/custody:1.0.0
+docker push xsmmaurya/custody:latest
+```
+
+------------------------------------------------------------------------
+
+## 7️⃣ Multi‑Arch Build & Push (buildx)
+
+``` bash
+docker buildx build   --platform linux/amd64,linux/arm64   -t xsmmaurya/custody:1.0.0   -t xsmmaurya/custody:latest   --push .
+```
+
+> `--push` uploads directly --- no separate push command needed.
+
+------------------------------------------------------------------------
+
+## 🔐 Security Best Practices
+
+-   Never commit access tokens to Git
+-   Use environment variables in CI/CD
+-   Rotate tokens periodically
+
+
 # End of Guide
 
 
