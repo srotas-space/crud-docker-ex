@@ -1,0 +1,45 @@
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+pnpm-lock.yaml
+
+# Build output
+dist
+build
+
+# Logs
+logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Docker
+docker-compose.yaml
+docker-compose.yml
+Dockerfile*
+
+# Env files (optional - be careful)
+.env
+.env.local
+.env.development
+.env.production
+
+# Tests
+coverage
+*.test.ts
+*.spec.ts
+
+# IDE
+.vscode
+.idea
+
+# Misc
+tmp
+.cache
