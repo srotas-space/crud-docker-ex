@@ -12,6 +12,59 @@ Stack: - Node.js (TypeScript) - PostgreSQL - Redis - Docker - Docker
 Compose
 
 ------------------------------------------------------------------------
+# Requirements
+
+## PostgreSQL
+
+```CMD
+brew install postgresql@16
+
+brew services start postgresql@16
+
+
+# Create user#lily, database#lilydb with password#lilyXWatMoo
+
+psql postgres
+
+CREATE USER lily WITH PASSWORD 'lilyXWatMoo';
+
+ALTER USER lily CREATEDB;
+
+ALTER USER lily WITH SUPERUSER;
+
+CREATE DATABASE lilydb OWNER lily;
+```
+
+
+## Nodejs
+```CMD
+brew install nvm
+
+mkdir ~/.nvm
+
+Add this to your ~/.zshrc (Mac default shell):
+  export NVM_DIR="$HOME/.nvm"
+  source $(brew --prefix nvm)/nvm.sh
+
+
+source ~/.zshrc
+
+
+node -v
+npm -v
+```
+
+
+## Redis
+```CMD
+brew install redis
+
+brew services start redis
+```
+------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
 
 # Project Structure
 
@@ -51,12 +104,14 @@ Compose
     "redis": "^4.6.7"
   },
   "devDependencies": {
-    "typescript": "^5.4.0",
     "@types/express": "^4.17.21",
     "@types/node": "^20.11.0",
-    "ts-node-dev": "^2.0.0"
+    "@types/pg": "^8.16.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.0"
   }
 }
+
 ```
 
 ------------------------------------------------------------------------
@@ -175,9 +230,9 @@ app.listen(config.port, () => {
     PORT=3000
 
     PG_HOST=localhost
-    PG_USER=postgres
-    PG_PASSWORD=postgres
-    PG_DATABASE=testdb
+    PG_USER=lily
+    PG_PASSWORD=lilyXWatMoo
+    PG_DATABASE=lilydb
     PG_PORT=5432
 
     REDIS_URL=redis://localhost:6379
@@ -187,6 +242,8 @@ app.listen(config.port, () => {
     npm install
     npm run dev
 
+
+TO Test refer # Test Cases
 ------------------------------------------------------------------------
 
 # Phase 2 --- Docker Compose
@@ -262,6 +319,9 @@ volumes:
 
     docker-compose up --build
 
+
+TO Test refer # Test Cases
+
 ------------------------------------------------------------------------
 
 # Phase 3 --- Optimized Multi‑Stage Build
@@ -299,6 +359,9 @@ CMD ["node", "dist/index.js"]
 ## Run
 
     docker-compose up --build
+
+
+TO Test refer # Test Cases
 
 ------------------------------------------------------------------------
 
